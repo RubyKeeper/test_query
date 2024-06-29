@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+    php:
+        build: ./php
+        hostname: localhost
+        container_name: php_test
+        volumes:
+            -   ./:/var/www/html
+        links:
+            - db
+
+    db:
+        image: mysql:8.0
+        container_name: mysql_test
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: database
+            MYSQL_ROOT_PASSWORD: password
+        volumes:
+            - ./mysql:/var/lib/mysql
